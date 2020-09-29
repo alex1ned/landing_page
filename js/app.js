@@ -12,7 +12,7 @@
  * JS Standard: ESlint
  *
 */
-
+// Commit
 
 // -------------------------------- Project layout
 // 1) Navigation Bar
