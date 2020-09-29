@@ -13,6 +13,7 @@
  *
 */
 
+
 // !!! Temporary --- delete later
 // const header1 = sectionHeadersArray[0];
 // const header2 = sectionHeadersArray[1];
@@ -46,8 +47,11 @@ function createListItems(numberOfSections, type, class_name, parent) {
   const navFragment = document.createDocumentFragment();
   for (let i = 0; i < numberOfSections; i++) {
     const newNavChild = document.createElement(type);
+    const newNavChildAnchor = document.createElement('a');
     newNavChild.className = class_name;
-    newNavChild.textContent = sectionHeadersArray[i].textContent;
+    newNavChildAnchor.href = '#section' + (i+1);
+    newNavChildAnchor.textContent = sectionHeadersArray[i].textContent;
+    newNavChild.appendChild(newNavChildAnchor);
     navFragment.appendChild(newNavChild);
   }
   parent.appendChild(navFragment);
@@ -106,9 +110,53 @@ sectionHeadersArray.forEach(h2 => { observer.observe(h2) });
 
 // 3) -------------------------------- SCROLL TO SECTION on click
 
+// const navListArray = document.querySelectorAll('.menu__link');
+// console.log(navListArray[3].firstChild);
+//
+//
+// function scrollTo(hash) {
+//     location.hash = "#" + hash;
+// }
+//
+// elementToApplyEvent = navListArray[1];
+//
+// elementToApplyEvent.addEventListener('click', function(evt) {
+//   evt.preventDefault();
+//   let top = 0;
+//   // const scrollOptions = {
+//   //   top: 1000,
+//   //   behavior: 'smooth'
+//   // }
+//   window.scrollTo('section2');
+// });
+//
+// function scrollTo(hash) {
+//     location.hash = "#" + hash;
+// }
 
 
+$('a[href^="#"]').on('click',function(evt) {
+  evt.preventDefault();
+  var elementToScollTo = this.hash;
+  var $elementToScollTo = $(elementToScollTo);
+  $('html, body').stop().animate({
+    'scrollTop': $elementToScollTo.offset().top
+  }, 1000, 'swing', function () {
+    window.location.hash = elementToScollTo;
+ });
+});
 
+
+// $('a[href^="#"]').on('click',function(e) {
+//  e.preventDefault();
+//  var target = this.hash;
+//  var $target = $(target);
+//  $('html, body').stop().animate({
+//   'scrollTop': $target.offset().top
+//  }, 900, 'swing', function () {
+//   window.location.hash = target;
+//  });
+// });
 
 
 
