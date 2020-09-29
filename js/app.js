@@ -114,9 +114,6 @@ sectionHeadersArray.forEach(h2 => { observer.observe(h2) });
 // console.log(navListArray[3].firstChild);
 //
 //
-// function scrollTo(hash) {
-//     location.hash = "#" + hash;
-// }
 //
 // elementToApplyEvent = navListArray[1];
 //
@@ -135,33 +132,43 @@ sectionHeadersArray.forEach(h2 => { observer.observe(h2) });
 // }
 
 
-$('a[href^="#"]').on('click',function(evt) {
+
+const allAnchors = document.querySelectorAll('a');
+
+// for (let i = 0; i < numberOfSections; i++) {
+//   allAnchors[i].addEventListener('click', function(evt) {
+//     evt.preventDefault();
+//     var targetHash = allAnchors[i].hash;
+//     var $elementToScollTo = $(elementToScollTo);
+//     console.log(targetHash);
+//     console.log($elementToScollTo);
+//
+//     $('html, body').stop().animate({
+//       'scrollTop': $elementToScollTo.offset().top
+//     }, 1000, 'swing', function () {
+//       window.location.hash = targetHash;
+//     });
+//   });
+// }
+
+
+for (let i = 0; i < numberOfSections; i++) {
+  allAnchors[i].parentNode.addEventListener('click', function(evt) {
   evt.preventDefault();
-  var elementToScollTo = this.hash;
-  var $elementToScollTo = $(elementToScollTo);
-  $('html, body').stop().animate({
-    'scrollTop': $elementToScollTo.offset().top
-  }, 1000, 'swing', function () {
-    window.location.hash = elementToScollTo;
- });
+  var targetHash = allAnchors[i].hash;
+  var targetElement = document.getElementById(`section${i+1}`).firstElementChild.firstElementChild;
+  targetElement.scrollIntoView({
+    block: 'center',
+    behavior: 'smooth'
+  });
 });
-
-
-// $('a[href^="#"]').on('click',function(e) {
-//  e.preventDefault();
-//  var target = this.hash;
-//  var $target = $(target);
-//  $('html, body').stop().animate({
-//   'scrollTop': $target.offset().top
-//  }, 900, 'swing', function () {
-//   window.location.hash = target;
-//  });
-// });
+}
 
 
 
 
-// Scroll to section on link click - to anchor ID using scrollTO event
+
+
 
 // Hide navBar when not scrolling (but should be there at pageLoad)
 // - setTimeout can be used to check whether user stops scrolling
