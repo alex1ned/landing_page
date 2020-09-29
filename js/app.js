@@ -12,7 +12,9 @@
  * JS Standard: ESlint
  *
 */
-// Commit
+
+// To DO:
+// - Refactor: 'scroll' event to Intersection Observer
 
 // -------------------------------- Project layout
 // 1) Navigation Bar
