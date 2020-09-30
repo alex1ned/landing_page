@@ -41,9 +41,14 @@ h2 {
 }
 
 p {
+  display: none;
   line-height: 1.6em;
   color: #eee;
 }
+
+/* section.active .landing__container p {
+  display: block;
+} */
 
 a {
   color: inherit;
@@ -62,9 +67,14 @@ main {
   padding-top: 3em;
 }
 
+/* section.active {
+  min-height: 80vh;
+} */
+
 section {
   position: relative;
-  min-height: 80vh;
+  min-height: 0;
+  /* border: 1px solid magenta !important; */
 }
 
 /* -------------------------------------- Module Rules ---- */
@@ -126,7 +136,6 @@ section {
 .landing__container {
   padding: 1em;
   text-align: left;
-  border: 1px solid red !important;
 }
 
 @media only screen and (min-width: 35em){

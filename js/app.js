@@ -123,12 +123,40 @@ for (let i = 0; i < numberOfSections; i++) {
 
 // 4) -------------------------------- Make SECTIONS COLLAPSIBLE on click
 
-sectionHeadersArray[1].addEventListener('click', function(evt) {
-  console.log(sectionHeadersArray[1]);
-  
-});
+// On Click - what needs to happen?
+// - make <section> element min-height: 80 or revert to 0vh again
+// - make 'display' of 'section .landing__container p' to 'block' or
+//   reverse again to 'display: none'
+//  !! How to toggle?
+
+for (let i = 0; i < numberOfSections; i++) {
+  sectionHeadersArray[i].addEventListener('click', function(evt) {
+    const sectionParent = sectionHeadersArray[i].parentNode.parentNode;
+    const sectionChildrenArray = sectionHeadersArray[i].parentNode.querySelectorAll('p');
+    for (let i = 0; i < sectionChildrenArray.length; i++) {
+      sectionChildrenArray[i].style.display = 'block';
+      // sectionChildrenArray[i].style.transition = 'ease 1.3s';
+    }
+    sectionParent.style.minHeight = '80vh';
+    // sectionParent.style.transition = 'ease 1.3s';
+  });
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// !!! ------- Other to do
 
 // Hide navBar when not scrolling (but should be there at pageLoad)
 // - setTimeout can be used to check whether user stops scrolling
