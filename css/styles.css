@@ -41,14 +41,9 @@ h2 {
 }
 
 p {
-  display: none;
   line-height: 1.6em;
   color: #eee;
 }
-
-/* section.active .landing__container p {
-  display: block;
-} */
 
 a {
   color: inherit;
@@ -67,14 +62,18 @@ main {
   padding-top: 3em;
 }
 
-/* section.active {
-  min-height: 80vh;
-} */
-
 section {
   position: relative;
   min-height: 0;
+  /* transition: min-height 1.3s ease-out; */
   /* border: 1px solid magenta !important; */
+}
+
+/* !!! Requires change here !!! */
+.collapsible {
+  overflow: hidden;
+  height: auto;
+  transition: height 0.5s ease-out;
 }
 
 /* -------------------------------------- Module Rules ---- */

@@ -123,29 +123,70 @@ for (let i = 0; i < numberOfSections; i++) {
 
 // 4) -------------------------------- Make SECTIONS COLLAPSIBLE on click
 
-// On Click - what needs to happen?
-// - make <section> element min-height: 80 or revert to 0vh again
-// - make 'display' of 'section .landing__container p' to 'block' or
-//   reverse again to 'display: none'
-//  !! How to toggle?
+// To do:
+// - Needs to be refactored to when element is initially collapsed
+//    - height of element in css need to be 0 instead of auto
+// - Delete the console.log() debuggers
 
-for (let i = 0; i < numberOfSections; i++) {
-  sectionHeadersArray[i].addEventListener('click', function(evt) {
-    const sectionParent = sectionHeadersArray[i].parentNode.parentNode;
-    const sectionChildrenArray = sectionHeadersArray[i].parentNode.querySelectorAll('p');
-    for (let i = 0; i < sectionChildrenArray.length; i++) {
-      sectionChildrenArray[i].style.display = 'block';
-      // sectionChildrenArray[i].style.transition = 'ease 1.3s';
-    }
-    sectionParent.style.minHeight = '80vh';
-    // sectionParent.style.transition = 'ease 1.3s';
+function collapseContent(elementToCollapse) {
+  // Get the height of the element's inner content
+  const contentHeight = elementToCollapse.scrollHeight;
+  console.log("In Collapsing Function!");
+
+  // Temporarily disable all css transitions
+  const elementTransition = elementToCollapse.style.transition;
+  elementToCollapse.style.transition = '';
+
+  // Set the element's height to its current pixel height, so we
+  // aren't transitioning out of 'auto'
+  requestAnimationFrame(function() {
+    elementToCollapse.style.height = contentHeight + 'px';
+    elementToCollapse.style.transition = elementTransition;
+
+    // Transition content to height: 0
+    requestAnimationFrame(function() {
+      elementToCollapse.style.height = 0 + 'px';
+    });
   });
+
+  // mark the section as "currently collapsed"
+  elementToCollapse.setAttribute('is-collapsed', 'true');
 }
 
+function expandContent(elementToExpand) {
+  // Get the height of the element's inner content
+  const contentHeight = elementToExpand.scrollHeight;
+  console.log("In Expanding Function!");
 
+  // Have the element transition to the height of its inner content
+  elementToExpand.style.height = contentHeight + 'px';
 
+  elementToExpand.addEventListener('transitionend', function(e) {
+    elementToExpand.removeEventListener('transitionend', arguments.callee);
 
+    // Remove "height" from the element's inline styles, so it can return to its initial value
+    elementToExpand.style.height = null;
+  });
 
+  // mark the section as "currently not collapsed"
+  elementToExpand.setAttribute('is-collapsed', 'false');
+}
+
+sectionHeadersArray[1].addEventListener('click', function(evt) {
+  console.log("Is clicked");
+  const contentToToggleCollapse = sectionHeadersArray[1].nextElementSibling;
+  const isCollapsed = contentToToggleCollapse.getAttribute('is-collapsed');
+
+  console.log('');
+  console.log('Collapsed is set to: ' + isCollapsed);
+
+  if(isCollapsed === 'true') {
+    expandContent(contentToToggleCollapse)
+    contentToToggleCollapse.setAttribute('is-collapsed', 'false')
+  } else if (isCollapsed === 'false') {
+    collapseContent(contentToToggleCollapse)
+  }
+});
 
 
 
