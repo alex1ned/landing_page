@@ -26,8 +26,6 @@
 
 
 // To DO:
-// - Refactor: 'scroll' event to Intersection Observer
-// - Scroll to section upon click
 // - Hide navbar when not scrolling
 // - Add scroll to top button
 // - Make sections collapsible on click
@@ -109,53 +107,12 @@ sectionHeadersArray.forEach(h2 => { observer.observe(h2) });
 
 
 // 3) -------------------------------- SCROLL TO SECTION on click
-
-// const navListArray = document.querySelectorAll('.menu__link');
-// console.log(navListArray[3].firstChild);
-//
-//
-//
-// elementToApplyEvent = navListArray[1];
-//
-// elementToApplyEvent.addEventListener('click', function(evt) {
-//   evt.preventDefault();
-//   let top = 0;
-//   // const scrollOptions = {
-//   //   top: 1000,
-//   //   behavior: 'smooth'
-//   // }
-//   window.scrollTo('section2');
-// });
-//
-// function scrollTo(hash) {
-//     location.hash = "#" + hash;
-// }
-
-
-
 const allAnchors = document.querySelectorAll('a');
 
-// for (let i = 0; i < numberOfSections; i++) {
-//   allAnchors[i].addEventListener('click', function(evt) {
-//     evt.preventDefault();
-//     var targetHash = allAnchors[i].hash;
-//     var $elementToScollTo = $(elementToScollTo);
-//     console.log(targetHash);
-//     console.log($elementToScollTo);
-//
-//     $('html, body').stop().animate({
-//       'scrollTop': $elementToScollTo.offset().top
-//     }, 1000, 'swing', function () {
-//       window.location.hash = targetHash;
-//     });
-//   });
-// }
-
-
 for (let i = 0; i < numberOfSections; i++) {
+  // EVENT LISTENER for each anchor element
   allAnchors[i].parentNode.addEventListener('click', function(evt) {
   evt.preventDefault();
-  var targetHash = allAnchors[i].hash;
   var targetElement = document.getElementById(`section${i+1}`).firstElementChild.firstElementChild;
   targetElement.scrollIntoView({
     block: 'center',
@@ -164,9 +121,12 @@ for (let i = 0; i < numberOfSections; i++) {
 });
 }
 
+// 4) -------------------------------- Make SECTIONS COLLAPSIBLE on click
 
-
-
+sectionHeadersArray[1].addEventListener('click', function(evt) {
+  console.log(sectionHeadersArray[1]);
+  
+});
 
 
 
