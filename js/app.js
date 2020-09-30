@@ -16,7 +16,6 @@
 // To DO:
 // - Hide navbar when not scrolling
 // - Add scroll to top button
-// - Make sections collapsible on click
 
 
 
@@ -110,17 +109,10 @@ for (let i = 0; i < numberOfSections; i++) {
 
 // 4) -------------------------------- Make SECTIONS COLLAPSIBLE on click
 
-// To do:
-// - Needs to be refactored to when element is initially collapsed
-//    - height of element in css need to be 0 instead of auto
-// - Delete the console.log() debuggers
-
 function collapseContent(elementToCollapse) {
   // Get the height of the element's inner content
   const contentHeight = elementToCollapse.scrollHeight;
-  console.log("In Collapsing Function!");
 
-  // Temporarily disable all css transitions
   const elementTransition = elementToCollapse.style.transition;
   elementToCollapse.style.transition = '';
 
@@ -136,59 +128,34 @@ function collapseContent(elementToCollapse) {
     });
   });
 
-  // mark the section as "currently collapsed"
   elementToCollapse.setAttribute('is-collapsed', 'true');
 }
 
 function expandContent(elementToExpand) {
   // Get the height of the element's inner content
   const contentHeight = elementToExpand.scrollHeight;
-  console.log("In Expanding Function!");
 
   // Have the element transition to the height of its inner content
   elementToExpand.style.height = contentHeight + 'px';
 
   elementToExpand.addEventListener('transitionend', function(e) {
     elementToExpand.removeEventListener('transitionend', arguments.callee);
-
-    // Remove "height" from the element's inline styles, so it can return to its initial value
-    elementToExpand.style.height = null;
   });
 
-  // mark the section as "currently not collapsed"
   elementToExpand.setAttribute('is-collapsed', 'false');
 }
 
-// sectionHeadersArray[1].addEventListener('click', function(evt) {
-//   console.log("Is clicked");
-//   const contentToToggleCollapse = sectionHeadersArray[1].nextElementSibling;
-//   const isCollapsed = contentToToggleCollapse.getAttribute('is-collapsed');
-//
-//   console.log('');
-//   console.log('Collapsed is set to: ' + isCollapsed);
-//
-//   if(isCollapsed === 'true') {
-//     expandContent(contentToToggleCollapse)
-//     contentToToggleCollapse.setAttribute('is-collapsed', 'false')
-//   } else if (isCollapsed === 'false') {
-//     collapseContent(contentToToggleCollapse)
-//   }
-// });
-
-
+// Add EVENT LISTENER for each 'h2' element of the webpage (each section)
 for (let i = 0; i < numberOfSections; i++) {
   sectionHeadersArray[i].addEventListener('click', function(evt) {
-    console.log("Is clicked");
     const contentToToggleCollapse = sectionHeadersArray[i].nextElementSibling;
     const isCollapsed = contentToToggleCollapse.getAttribute('is-collapsed');
-
-    console.log('');
-    console.log('Collapsed is set to: ' + isCollapsed);
 
     if(isCollapsed === 'true') {
       expandContent(contentToToggleCollapse)
       contentToToggleCollapse.setAttribute('is-collapsed', 'false')
-    } else if (isCollapsed === 'false') {
+    }
+    else if (isCollapsed === 'false') {
       collapseContent(contentToToggleCollapse)
     }
   });

@@ -72,7 +72,7 @@ section {
 /* !!! Requires change here !!! */
 .collapsible {
   overflow: hidden;
-  height: auto;
+  height: 0;
   transition: height 0.5s ease-out;
 }
 
