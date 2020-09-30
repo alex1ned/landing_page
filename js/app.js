@@ -13,18 +13,6 @@
  *
 */
 
-
-// !!! Temporary --- delete later
-// const header1 = sectionHeadersArray[0];
-// const header2 = sectionHeadersArray[1];
-// const header3 = sectionHeadersArray[2];
-// const header4 = sectionHeadersArray[3];
-// const header5 = sectionHeadersArray[4];
-// const header6 = sectionHeadersArray[5];
-// const header7 = sectionHeadersArray[6];
-
-
-
 // To DO:
 // - Hide navbar when not scrolling
 // - Add scroll to top button
@@ -99,7 +87,6 @@ let observer = new IntersectionObserver((entries, observer) => {
       resetClassForSectionElements();
       entry.target.parentNode.parentNode.classList.add('active');
       resetClassForNavListElements();
-      // observer.unobserve(entry.target);
     }
   });
 });
@@ -172,22 +159,40 @@ function expandContent(elementToExpand) {
   elementToExpand.setAttribute('is-collapsed', 'false');
 }
 
-sectionHeadersArray[1].addEventListener('click', function(evt) {
-  console.log("Is clicked");
-  const contentToToggleCollapse = sectionHeadersArray[1].nextElementSibling;
-  const isCollapsed = contentToToggleCollapse.getAttribute('is-collapsed');
+// sectionHeadersArray[1].addEventListener('click', function(evt) {
+//   console.log("Is clicked");
+//   const contentToToggleCollapse = sectionHeadersArray[1].nextElementSibling;
+//   const isCollapsed = contentToToggleCollapse.getAttribute('is-collapsed');
+//
+//   console.log('');
+//   console.log('Collapsed is set to: ' + isCollapsed);
+//
+//   if(isCollapsed === 'true') {
+//     expandContent(contentToToggleCollapse)
+//     contentToToggleCollapse.setAttribute('is-collapsed', 'false')
+//   } else if (isCollapsed === 'false') {
+//     collapseContent(contentToToggleCollapse)
+//   }
+// });
 
-  console.log('');
-  console.log('Collapsed is set to: ' + isCollapsed);
 
-  if(isCollapsed === 'true') {
-    expandContent(contentToToggleCollapse)
-    contentToToggleCollapse.setAttribute('is-collapsed', 'false')
-  } else if (isCollapsed === 'false') {
-    collapseContent(contentToToggleCollapse)
-  }
-});
+for (let i = 0; i < numberOfSections; i++) {
+  sectionHeadersArray[i].addEventListener('click', function(evt) {
+    console.log("Is clicked");
+    const contentToToggleCollapse = sectionHeadersArray[i].nextElementSibling;
+    const isCollapsed = contentToToggleCollapse.getAttribute('is-collapsed');
 
+    console.log('');
+    console.log('Collapsed is set to: ' + isCollapsed);
+
+    if(isCollapsed === 'true') {
+      expandContent(contentToToggleCollapse)
+      contentToToggleCollapse.setAttribute('is-collapsed', 'false')
+    } else if (isCollapsed === 'false') {
+      collapseContent(contentToToggleCollapse)
+    }
+  });
+}
 
 
 
@@ -204,5 +209,3 @@ sectionHeadersArray[1].addEventListener('click', function(evt) {
 
 // Add scroll to top button at end which only appears if user scrols below
 // the fold of the page
-
-// Make sections collapsible on click
