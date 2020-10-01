@@ -71,11 +71,8 @@ main {
 section {
   position: relative;
   min-height: 0;
-  /* transition: min-height 1.3s ease-out; */
-  /* border: 1px solid magenta !important; */
 }
 
-/* !!! Requires change here !!! */
 .collapsible {
   overflow: hidden;
   height: 0;
@@ -90,6 +87,9 @@ section {
   top: 0;
   width: 100%;
   z-index: 5;
+  overflow: hidden;
+  height: auto;
+  transition: ease 0.5s all;
 }
 
 /* -------------------- FOOTER */
@@ -109,7 +109,6 @@ section {
   justify-content: center;
   align-items: center;
   margin-top: 50px;
-  /* border: 1px solid red !important; */
 }
 
 .back-top-button {
@@ -124,22 +123,39 @@ section {
   padding-bottom: 0.5em;
   border: 1px solid #10404a;
   transition: all 0.2s linear;
-  /* border: 1px solid magenta !important; */
 }
 
 .back-top-button:hover {
   color: #3ac0de;
   background-color: #10404a;
 }
+
+
 /* -------------------- Navigation MENU */
+.navbar__menu {
+
+  /* Play around here */
+  /* display: none; */
+  /* height: 0; */
+  /* border: 1px solid red !important; */
+}
+
 .navbar__menu ul {
   padding-left: 0;
   margin: 0;
   text-align: right;
+
+  /* Play around here */
+  /* height: 0; */
+  /* border: 1px solid blue !important; */
 }
 
 .navbar__menu li {
   display: inline-block;
+  /* Play around here */
+  /* height: 0;
+  padding: 0; */
+  /* border: 1px solid magenta !important; */
 }
 
 .navbar__menu .menu__link {

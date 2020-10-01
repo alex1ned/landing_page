@@ -178,11 +178,35 @@ for (let i = 0; i < numberOfSections; i++) {
 //   --> If stops scrolling hide navbar (smoothly by shrinking height)
 // * If user is scrolling the navbar should be there
 
+// https://stackoverflow.com/questions/9144560/jquery-scroll-detect-when-user-stops-scrolling
+$(window).scroll(function() {
+    clearTimeout($.data(this, 'scrollTimer'));
+    // Set elements needed
+    const navBar = document.querySelector('.page__header');
+    const navBarHeight = navBar.scrollHeight;
 
+    // If it was NOT scrolled for 500ms
+    $.data(this, 'scrollTimer', setTimeout(function() {
+        console.log("Haven't scrolled in 500ms!");
+        const elementTransition = navBar.style.transition;
+        navBar.style.transition = '';
+        requestAnimationFrame(function() {
+          navBar.style.height = navBarHeight + 'px';
+          navBar.style.transition = elementTransition;
 
+          // Transition content to height: 0
+          requestAnimationFrame(function() {
+            navBar.style.height = 0 + 'px';
+          });
+        });
+    }, 500));
 
-
-
+    // When scrolling
+    navBar.style.height = navBarHeight + 'px';
+    navBar.addEventListener('transitionend', function(e) {
+      navBar.removeEventListener('transitionend', arguments.callee);
+    });
+});
 
 
 
