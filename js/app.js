@@ -13,20 +13,15 @@
  *
 */
 
-// To DO:
-// - Hide navbar when not scrolling
-// - Add scroll to top button
 
-
-
-// *** Global Variables ***
+// *************************************************** Global Variables
 const numberOfSections = document.querySelectorAll('section').length;
 const sectionsArray = document.querySelectorAll('section');
 const sectionHeadersArray = document.querySelectorAll('.landing__container h2');
 const navbarList = document.querySelector('#navbar__list');
 const mainBody = document.querySelector('main');
 
-// *** Helper Functions ***
+// *************************************************** Helper Functions
 // Create the 'n' times 'li' items (with class name and text)
 function createListItems(numberOfSections, type, class_name, parent) {
   const navFragment = document.createDocumentFragment();
@@ -73,6 +68,7 @@ let resetClassForNavListElements = () => {
 };
 
 
+// *************************************************** FUNCTIONALITY
 // 1) -------------------------------- BUILD NAV-BAR
 createListItems(numberOfSections, 'li', 'menu__link', navbarList);
 
@@ -107,7 +103,10 @@ for (let i = 0; i < numberOfSections; i++) {
 });
 }
 
+
 // 4) -------------------------------- Make SECTIONS COLLAPSIBLE on click
+// Please note: The functionality, the sort of leaned on to the source below
+// Source: https://codepen.io/brundolf/pen/dvoGyw
 
 function collapseContent(elementToCollapse) {
   // Get the height of the element's inner content
@@ -162,6 +161,22 @@ for (let i = 0; i < numberOfSections; i++) {
 }
 
 
+// 5) -------------------------------- SHOW 'back to top' button at end
+// * Determine when user scrolls below fold of page
+// * If that happens increase the opacity of the BUTTON
+//   to 1 (in css do this transition over 0.5s)
+// * Add event handler to the button to scroll to top upon click
+// * Let button disappear if user scrolls up again
+
+
+
+
+
+// 6) -------------------------------- HIDE NAVBAR when NOT SCROLLING
+// * Navbar should be there at page Load
+// * Determine when user stops scrolling (setTimeout can be useful here)
+//   --> If stops scrolling hide navbar (smoothly by shrinking height)
+// * If user is scrolling the navbar should be there
 
 
 
@@ -169,10 +184,12 @@ for (let i = 0; i < numberOfSections; i++) {
 
 
 
-// !!! ------- Other to do
 
-// Hide navBar when not scrolling (but should be there at pageLoad)
-// - setTimeout can be used to check whether user stops scrolling
 
-// Add scroll to top button at end which only appears if user scrols below
-// the fold of the page
+
+
+
+
+
+
+// **************************** END OF FILE ****************************** //

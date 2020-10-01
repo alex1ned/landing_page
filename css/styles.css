@@ -50,11 +50,17 @@ a {
   text-decoration: inherit;
 }
 
+button {
+  background: none;
+  border: none;
+  /* font-style: inherit; */
+}
 
 
 /* -------------------------------------- Layout Rules ---- */
 main {
   margin: 10vh 1em 10vh;
+  margin-bottom: 3vh;
 }
 
 .main-hero {
@@ -97,6 +103,34 @@ section {
   color: #fff;
 }
 
+/* -------------------- BACK TOP BUTTON */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  /* border: 1px solid red !important; */
+}
+
+.back-top-button {
+  color: #10404a;
+  background-color: #3ac0de;
+  border-radius: 0.4em;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border: 1px solid #10404a;
+  transition: all 0.2s linear;
+  /* border: 1px solid magenta !important; */
+}
+
+.back-top-button:hover {
+  color: #3ac0de;
+  background-color: #10404a;
+}
 /* -------------------- Navigation MENU */
 .navbar__menu ul {
   padding-left: 0;
