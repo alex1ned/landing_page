@@ -21,6 +21,9 @@ const sectionHeadersArray = document.querySelectorAll('.landing__container h2');
 const navbarList = document.querySelector('#navbar__list');
 const mainBody = document.querySelector('main');
 
+
+
+
 // *************************************************** Helper Functions
 // Create the 'n' times 'li' items (with class name and text)
 function createListItems(numberOfSections, type, class_name, parent) {
@@ -66,6 +69,7 @@ let resetClassForNavListElements = () => {
   // Set currently active
   navListArray[index].classList.add('active');
 };
+
 
 
 // *************************************************** FUNCTIONALITY
@@ -172,34 +176,20 @@ for (let i = 0; i < numberOfSections; i++) {
 
 
 
-// 6) -------------------------------- HIDE NAVBAR when NOT SCROLLING
-// * Navbar should be there at page Load
-// * Determine when user stops scrolling (setTimeout can be useful here)
-//   --> If stops scrolling hide navbar (smoothly by shrinking height)
-// * If user is scrolling the navbar should be there
+// 6) -------------------------------- HIDE NAVBAR when NOT SCROLLING (for 2 seconds)
+window.addEventListener('scroll', function(evt) {
+  // Select the navBar element
+  const navBar = document.querySelector('.page__header');
 
-// https://stackoverflow.com/questions/9144560/jquery-scroll-detect-when-user-stops-scrolling
+  // Set timeout such that if user does not scroll for 2s, the
+  // navBar element will collapse
+  let timeoutID = setTimeout(function() {
+    collapseContent(navBar);
+  }, 2000);
 
-$(window).scroll(function() {
-    clearTimeout($.data(this, 'scrollTimer'));
-    // Set elements needed
-    const navBar = document.querySelector('.page__header');
-    // const navBarHeight = navBar.scrollHeight;
-
-    // If it was NOT scrolled for 500ms
-    $.data(this, 'scrollTimer', setTimeout(function() {
-        console.log("Haven't scrolled in 500ms!");
-        collapseContent(navBar);
-    }, 2000));
-
-    // When scrolling
-    console.log("User is scrolling");
-    expandContent(navBar);
+  // If user is scrolling -> expand navBar
+  expandContent(navBar);
 });
-
-
-
-
 
 
 
