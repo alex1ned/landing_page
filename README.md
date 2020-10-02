@@ -3,8 +3,8 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Layout of app.js file](#Layout of app.js file)
-* [Functionality that was added](#Functionality that was added)
+* [Layout of app.js file](#layout of app.js file)
+* [Functionality that was added](#functionality that was added)
 
 ## Instructions
 
