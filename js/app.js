@@ -182,7 +182,6 @@ const createBackTopButton = () => {
 
   // If user scrolls up to 1px to the bottom
   if (windowHeight > (documentHeight - 1)) {
-    console.log("Near bottom!");
     buttonContainer.classList.add('active');
   }
 };

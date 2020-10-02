@@ -3,6 +3,8 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
+* [Layout of app.js file](#Layout of app.js file)
+* [Functionality that was added](#Functionality that was added)
 
 ## Instructions
 
@@ -11,3 +13,8 @@ The starter project has some HTML and CSS styling to display a static version of
 To get started, open `js/app.js` and start building out the app's functionality
 
 For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
+
+## Layout of app.js file
+
+
+## Functionality that was added
