@@ -123,7 +123,7 @@ createListItems(numberOfSections, 'li', 'menu__link', navbarList);
 
 
 // 2) -------------------------------- OBSERVE when SECTIONS are in viewport
-// ----------------------------------- and change classes accordingly
+// ----------------------------------- change classes accordingly
 let observer = new IntersectionObserver((entries, observer) => {
   // isIntersecting is true when element and viewport are overlapping
   entries.forEach(entry => {
@@ -172,8 +172,6 @@ for (let i = 0; i < numberOfSections; i++) {
 
 
 // 5) -------------------------------- SHOW 'back to top' button at end
-// All done ... could be smoother scrolling
-
 // --> Make button appear if scrolled down sufficiently
 const createBackTopButton = () => {
   const buttonContainer = document.querySelector('.button-container');
