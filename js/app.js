@@ -20,12 +20,12 @@ const sectionsArray = document.querySelectorAll('section');
 const sectionHeadersArray = document.querySelectorAll('.landing__container h2');
 const navbarList = document.querySelector('#navbar__list');
 const mainBody = document.querySelector('main');
-
+// ****************************************************************************
 
 
 
 // *************************************************** Helper Functions
-// Create the 'n' times 'li' items (with class name and text)
+// ------- Create the 'n' times 'li' items (with class name and text)
 function createListItems(numberOfSections, type, class_name, parent) {
   const navFragment = document.createDocumentFragment();
   for (let i = 0; i < numberOfSections; i++) {
@@ -40,7 +40,7 @@ function createListItems(numberOfSections, type, class_name, parent) {
   parent.appendChild(navFragment);
 }
 
-// Return index of <section> that currently has the class active
+// ------- Return index of <section> that currently has the class active
 let indexCurrentlyActiveSection = () => {
   for (let i = 0; i < numberOfSections; i++) {
     if (sectionsArray[i].classList.contains('active')) {
@@ -50,15 +50,16 @@ let indexCurrentlyActiveSection = () => {
   return -1;
 };
 
-// Removes 'active' of classList for each <section> element
+// ------- Removes 'active' of classList for each <section> element
 let resetClassForSectionElements = () => {
   for (let i = 0; i < numberOfSections; i++) {
     sectionsArray[i].classList.remove('active');
   }
 };
 
-// Removes 'active' of classList for each <li> element
-// and set class of the correct <li> element to active
+
+// ------- Removes 'active' of classList for each <li> element
+// ------- and set class of the correct <li> element to active
 let resetClassForNavListElements = () => {
   const navListArray = document.querySelectorAll('.menu__link');
   let index = indexCurrentlyActiveSection();
@@ -69,6 +70,50 @@ let resetClassForNavListElements = () => {
   // Set currently active
   navListArray[index].classList.add('active');
 };
+
+
+// ------- Collapse the element that is passed as function argument
+// Please note: The functionality, the sort of leaned on to the source below
+// Source: https://codepen.io/brundolf/pen/dvoGyw
+function collapseContent(elementToCollapse) {
+  // Get the height of the element's inner content
+  const contentHeight = elementToCollapse.scrollHeight;
+
+  const elementTransition = elementToCollapse.style.transition;
+  elementToCollapse.style.transition = '';
+
+  // Set the element's height to  current px -> not transitioning out of 'auto'
+  requestAnimationFrame(function() {
+    elementToCollapse.style.height = contentHeight + 'px';
+    elementToCollapse.style.transition = elementTransition;
+
+    // Set content height to 0
+    requestAnimationFrame(function() {
+      elementToCollapse.style.height = 0 + 'px';
+    });
+  });
+  // Change class attribute to 'true'
+  elementToCollapse.setAttribute('is-collapsed', 'true');
+}
+
+
+// ------- Expand the element that is passed as function argument
+// Please note: The functionality, the sort of leaned on to the source below
+// Source: https://codepen.io/brundolf/pen/dvoGyw
+function expandContent(elementToExpand) {
+  // Get the height of the element's inner content
+  const contentHeight = elementToExpand.scrollHeight;
+
+  // Transition element to height of its inner content
+  elementToExpand.style.height = contentHeight + 'px';
+
+  elementToExpand.addEventListener('transitionend', function(e) {
+    elementToExpand.removeEventListener('transitionend', arguments.callee);
+  });
+  // Change class attribute to 'false'
+  elementToExpand.setAttribute('is-collapsed', 'false');
+}
+// ****************************************************************************
 
 
 
@@ -109,45 +154,6 @@ for (let i = 0; i < numberOfSections; i++) {
 
 
 // 4) -------------------------------- Make SECTIONS COLLAPSIBLE on click
-// Please note: The functionality, the sort of leaned on to the source below
-// Source: https://codepen.io/brundolf/pen/dvoGyw
-
-function collapseContent(elementToCollapse) {
-  // Get the height of the element's inner content
-  const contentHeight = elementToCollapse.scrollHeight;
-
-  const elementTransition = elementToCollapse.style.transition;
-  elementToCollapse.style.transition = '';
-
-  // Set the element's height to its current pixel height, so we
-  // aren't transitioning out of 'auto'
-  requestAnimationFrame(function() {
-    elementToCollapse.style.height = contentHeight + 'px';
-    elementToCollapse.style.transition = elementTransition;
-
-    // Transition content to height: 0
-    requestAnimationFrame(function() {
-      elementToCollapse.style.height = 0 + 'px';
-    });
-  });
-
-  elementToCollapse.setAttribute('is-collapsed', 'true');
-}
-
-function expandContent(elementToExpand) {
-  // Get the height of the element's inner content
-  const contentHeight = elementToExpand.scrollHeight;
-
-  // Have the element transition to the height of its inner content
-  elementToExpand.style.height = contentHeight + 'px';
-
-  elementToExpand.addEventListener('transitionend', function(e) {
-    elementToExpand.removeEventListener('transitionend', arguments.callee);
-  });
-
-  elementToExpand.setAttribute('is-collapsed', 'false');
-}
-
 // Add EVENT LISTENER for each 'h2' element of the webpage (each section)
 for (let i = 0; i < numberOfSections; i++) {
   sectionHeadersArray[i].addEventListener('click', function(evt) {
@@ -166,13 +172,29 @@ for (let i = 0; i < numberOfSections; i++) {
 
 
 // 5) -------------------------------- SHOW 'back to top' button at end
-// * Determine when user scrolls below fold of page
-// * If that happens increase the opacity of the BUTTON
-//   to 1 (in css do this transition over 0.5s)
-// * Add event handler to the button to scroll to top upon click
-// * Let button disappear if user scrolls up again
+// All done ... could be smoother scrolling
 
+// --> Make button appear if scrolled down sufficiently
+const createBackTopButton = () => {
+  const buttonContainer = document.querySelector('.button-container');
+  const windowHeight = window.scrollY + window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
 
+  // If user scrolls up to 1px to the bottom
+  if (windowHeight > (documentHeight - 1)) {
+    console.log("Near bottom!");
+    buttonContainer.classList.add('active');
+  }
+};
+window.addEventListener('scroll', createBackTopButton);
+
+// --> Move up to top on click of button
+const moveBackTop = () => {
+  window.scrollTo(0, 0);
+};
+
+const buttonToTop = document.querySelector('.back-top-button');
+buttonToTop.addEventListener('click', moveBackTop);
 
 
 
@@ -190,7 +212,6 @@ window.addEventListener('scroll', function(evt) {
   // If user is scrolling -> expand navBar
   expandContent(navBar);
 });
-
 
 
 
