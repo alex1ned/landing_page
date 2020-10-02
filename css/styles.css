@@ -53,7 +53,6 @@ a {
 button {
   background: none;
   border: none;
-  /* font-style: inherit; */
 }
 
 
@@ -141,30 +140,14 @@ section {
 
 
 /* -------------------- Navigation MENU */
-.navbar__menu {
-
-  /* Play around here */
-  /* display: none; */
-  /* height: 0; */
-  /* border: 1px solid red !important; */
-}
-
 .navbar__menu ul {
   padding-left: 0;
   margin: 0;
   text-align: right;
-
-  /* Play around here */
-  /* height: 0; */
-  /* border: 1px solid blue !important; */
 }
 
 .navbar__menu li {
   display: inline-block;
-  /* Play around here */
-  /* height: 0;
-  padding: 0; */
-  /* border: 1px solid magenta !important; */
 }
 
 .navbar__menu .menu__link {
